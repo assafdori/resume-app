@@ -1,4 +1,4 @@
-# lightweight Nginx image
+## lightweight Nginx image
 FROM nginx:alpine
 
 # Copy HTML, CSS, JavaScript, images, and PDF files to Nginx web root
