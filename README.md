@@ -1,5 +1,5 @@
 # Terminal Resume 💻
-Terminal Resume is a very basic terminal emulator using HTML, CSS and JavaScript to display resume in terminal.<br>
+Terminal Resume is a basic terminal emulator using HTML, CSS and JavaScript to showcase my resume in terminal.<br>
 <b>Demo Link - <a href="https://assafdori.com" target="_blank">https://assafdori.com</a></b><br>
 
 <img src="https://github.com/assafdori/resume/blob/main/screen-record.gif?raw=true" width=100%>
