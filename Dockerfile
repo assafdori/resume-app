@@ -1,4 +1,4 @@
-# Use a lightweight Nginx image
+# lightweight Nginx image
 FROM nginx:alpine
 
 # Copy HTML, CSS, JavaScript, images, and PDF files to Nginx web root
@@ -9,5 +9,5 @@ COPY favicon.png /usr/share/nginx/html
 COPY screen-record.gif /usr/share/nginx/html
 COPY resume.pdf /usr/share/nginx/html
 
-# Expose port 80 to allow outside access to the web server
+# Expose port 80 of the container
 EXPOSE 80
