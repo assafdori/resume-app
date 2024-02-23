@@ -11,5 +11,3 @@ COPY resume.pdf /usr/share/nginx/html
 
 # Expose port 80 of the container
 EXPOSE 80
-
-# Tomer is gay
