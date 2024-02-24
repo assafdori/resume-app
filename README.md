@@ -12,3 +12,7 @@ Terminal Resume is a basic terminal emulator using HTML, CSS and JavaScript to s
 - Download resume with <b>download</b> command
 - Display error message on incorrect command
 - Auto scroll down console with command output
+
+### Progress, Journaling & Ideas
+- 24/02/2024 - As of now, the base app is ready. I'm thinking of implementing a visitor counter and some sort of Python monitoring, just for the learning. Actual monitoring will be utilized by a more 'meta' app, such as Prometheus & visualize with Grafana.
+- 24/02/2024 - As of now, the next hop in the project is to better learn Ansible/Terraform to start with the deployment and automation process of the app.
