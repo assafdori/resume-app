@@ -5,19 +5,19 @@ Terminal Resume is a terminal emulator using HTML, CSS and JavaScript to showcas
 <img src="https://github.com/assafdori/resume/blob/main/screen-record.gif?raw=true" width=100%>
 
 ### Features
-- Customized commands to display various resume sections
+- Customized commands to display different resume sections
 - Cycle through the commands history using <b>up</b> ⬆️ and <b>down</b> ⬇️ arrow keys
 - Command completion using <b>Ctrl</b> + <b>Space</b> keyboard shortcut
 - Clear console with <b>clear</b> command
 - Download resume with <b>download</b> command
 - Display error message on incorrect command
-- Auto scroll down console with command output
+- Automatic console scroll down with command output
 
 ### Available Commands
 ```zsh
 help, about, education, projects, experience, skills, contact, download, clear
 ```
-### Application is also available as a finished Docker image
+### Application is available as a finished Docker image
 ```zsh
 docker pull asixl/cli-resume:0.0.3
 ```
