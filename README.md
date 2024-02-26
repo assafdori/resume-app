@@ -16,7 +16,7 @@ Terminal Resume is a terminal emulator using HTML, CSS and JavaScript to showcas
 ### Available Commands
 - help, about, education, projects, experience, skills, contact, download, clear
 
-### Web application is also available as a finished Docker image
+### Application is also available as a finished Docker image
 ```zsh
 docker pull asixl/cli-resume:0.0.3
 ```
