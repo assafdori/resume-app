@@ -23,7 +23,7 @@ docker pull asixl/cli-resume:0.0.3
 ```
 
 ### Progress, Journaling & Ideas
-- 24/02/2024 - As of now, the base app is ready. I'm thinking of implementing a visitor counter and some sort of Python monitoring, just for the learning. Actual monitoring will be utilized by a more 'meta' app, such as Prometheus & visualize with Grafana.
-- 24/02/2024 - As of now, the next hop in the project is to better learn Ansible/Terraform to start with the deployment and automation process of the app.
-- 24/02/2024 - Next steps are to create another Dockerfile & Docker image that it's purpose is to do HTTP requests to the main container to check it's alive and make the end point var to come from the config file of the k8s pod - "GET http://localhost:port/index.html" 
+- 26/02/2024 - As of now, the base app is ready. I'm thinking of implementing a visitor counter and some sort of Python monitoring, just for the learning. Actual monitoring will be utilized by a more standarized industry solution, such as Prometheus & visualize with Grafana.
+- 26/02/2024 - As of now, the next hop in the project is to better learn Ansible/Terraform to start with the deployment and automation process of the app.
+- 26/02/2024 - Next steps are to create another Dockerfile & Docker image that it's purpose is to do HTTP requests to the main container to check it's alive and make the end point var to come from the config file of the k8s pod - "GET http://localhost:port/index.html" 
 http://{end_point_coming_from_config}
