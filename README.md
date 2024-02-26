@@ -1,6 +1,6 @@
 # Terminal Resume 💻
 Terminal Resume is a terminal emulator using HTML, CSS and JavaScript to showcase my resume in terminal.<br><p>
-<b>Live Site - <a href="https://www.assafdori.com" target="_blank">https://www.assafdori.com</a></b><br>
+<b>Live Site - <a href="https://www.assafdori.com" target="_blank">https://www.assafdori.com</a></b><br> (Currently inactive)
 
 <img src="https://github.com/assafdori/resume/blob/main/screen-record.gif?raw=true" width=100%>
 
