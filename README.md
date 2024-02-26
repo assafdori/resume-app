@@ -16,6 +16,11 @@ Terminal Resume is a terminal emulator using HTML, CSS and JavaScript to showcas
 ### Available Commands
 - help, about, education, projects, experience, skills, contact, download, clear
 
+### Web application is also available as a finished Docker image
+```zsh
+docker pull asixl/cli-resume:0.0.3
+```
+
 ### Progress, Journaling & Ideas
 - 24/02/2024 - As of now, the base app is ready. I'm thinking of implementing a visitor counter and some sort of Python monitoring, just for the learning. Actual monitoring will be utilized by a more 'meta' app, such as Prometheus & visualize with Grafana.
 - 24/02/2024 - As of now, the next hop in the project is to better learn Ansible/Terraform to start with the deployment and automation process of the app.
