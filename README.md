@@ -19,7 +19,7 @@ help, about, education, projects, experience, skills, contact, download, clear
 ```
 ### Application is available as a finished Docker image
 ```zsh
-docker pull asixl/cli-resume:0.0.3
+docker pull asixl/cli-resume:0.0.4
 ```
 
 ### Progress, Journaling & Ideas
