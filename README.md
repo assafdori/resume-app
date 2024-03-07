@@ -5,7 +5,7 @@ Terminal Resume is a terminal emulator using HTML, CSS and JavaScript to showcas
 
 <img src="https://github.com/assafdori/resume/blob/main/screen-record.gif?raw=true" width=100%>
 
-### Features
+### Features 🌐
 
 - Customized commands to display different resume sections
 - Cycle through the commands history using <b>up</b> ⬆️ and <b>down</b> ⬇️ arrow keys
@@ -15,19 +15,19 @@ Terminal Resume is a terminal emulator using HTML, CSS and JavaScript to showcas
 - Display error message on incorrect command
 - Automatic console scroll down with command output
 
-### Available Commands
+### Available Commands 🕹️
 
 ```zsh
 help, about, education, projects, experience, skills, contact, download, clear
 ```
 
-### Application is available as a finished Docker image
+### Application is available as a finished Docker image 🐋
 
 ```zsh
 docker pull asixl/cli-resume:0.0.7
 ```
 
-### Progress, Journaling & Ideas
+### Progress, Journaling & Ideas 💡
 
 - 26/02/2024 - As of now, the base app is ready. I'm thinking of implementing a visitor counter and some sort of Python monitoring, just for the learning. Actual monitoring will be utilized by a more standarized industry solution, such as Prometheus & visualize with Grafana.
 - 26/02/2024 - As of now, the next hop in the project is to better learn Ansible/Terraform to start with the deployment and automation process of the app.
