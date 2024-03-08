@@ -26,8 +26,8 @@ curl https://raw.githubusercontent.com/assafdori/resume-app/main/docker-compose.
 ### Features 🌐
 
 - Customized commands to display different resume sections
-- Cycle through the commands history using <b>up</b> ⬆️ and <b>down</b> ⬇️ arrow keys
-- Command completion using <b>Ctrl</b> + <b>Space</b> keyboard shortcut
+- Cycle through the commands history using <kbd>&uarr;</kbd> and <kbd>&darr;</kbd> arrow keys.
+- Command completion using <kbd>CTRL</kbd> + <kbd>SPACE</kbd> keyboard shortcut
 - Clear console with <b>clear</b> command
 - Download resume with <b>download</b> command
 - Display error message on incorrect command
