@@ -17,7 +17,7 @@ help, about, education, projects, experience, skills, contact, download, clear
 docker pull asixl/cli-resume:0.0.7
 ```
 
-### Application is available as a Docker-Compose YAML (ARM64 Systems) 🥳
+### Application is available as a Docker Compose YAML with Health Check Container (ARM64) 🥳
 
 ```zsh
 curl https://raw.githubusercontent.com/assafdori/resume-app/main/docker-compose.yml -o ./docker-compose.yml && docker compose up
@@ -32,6 +32,7 @@ curl https://raw.githubusercontent.com/assafdori/resume-app/main/docker-compose.
 - Download resume with <b>download</b> command
 - Display error message on incorrect command
 - Automatic console scroll down with command output
+- **Health check container that monitors the web application container**
 
 ### Progress, Journaling & Ideas 💡
 
