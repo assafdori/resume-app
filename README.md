@@ -11,13 +11,13 @@ Terminal Resume is a terminal emulator using HTML, CSS and JavaScript to showcas
 help, about, education, projects, experience, skills, contact, download, clear
 ```
 
-### Application is available as a finished Docker image 🐋
+### Application is available as a Docker image 🐋
 
 ```zsh
 docker pull asixl/cli-resume:0.0.7
 ```
 
-### Application is available as a Docker Compose YAML with Health Check Container (ARM64) 🥳
+### Application is available as a Docker Compose YAML with Health Check (ARM64) 🥳
 
 ```zsh
 curl https://raw.githubusercontent.com/assafdori/resume-app/main/docker-compose.yml -o ./docker-compose.yml && docker compose up
