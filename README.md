@@ -36,4 +36,4 @@ curl https://raw.githubusercontent.com/assafdori/resume-app/main/docker-compose.
 
 ### Progress, Journaling & Ideas 💡
 
-- March 7th, 2024 - Next stage is to implement a health check system that will check the main container via HTTP requests. Utilize Docker Compose for the proof of concept, then migrate to K8s once I've adapted to it.
+- ~~March 7th, 2024 - Next stage is to implement a health check system that will check the main container via HTTP requests. Utilize Docker Compose for the proof of concept, then migrate to K8s once I've adapted to it.~~
