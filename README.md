@@ -17,6 +17,12 @@ help, about, education, projects, experience, skills, contact, download, clear
 docker pull asixl/cli-resume:0.0.7
 ```
 
+### Application is available as a Docker-Compose YAML (ARM64 Systems) 🥳
+
+```zsh
+curl https://raw.githubusercontent.com/assafdori/resume-app/main/docker-compose.yml -o ./docker-compose.yml && docker compose up
+```
+
 ### Features 🌐
 
 - Customized commands to display different resume sections
