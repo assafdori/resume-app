@@ -1,0 +1,10 @@
+version: '3'
+
+
+services:
+  cli-resume:
+    image: asixl/cli-resume:0.0.7
+    ports:
+      - "8080:80"
+  health-check:
+    image: asixl/cli-health-check:0.0.1
