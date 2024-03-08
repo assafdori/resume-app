@@ -28,8 +28,8 @@ curl https://raw.githubusercontent.com/assafdori/resume-app/main/docker-compose.
 - Customized commands to display different resume sections
 - Cycle through the commands history using <kbd>&uarr;</kbd> and <kbd>&darr;</kbd> arrow keys.
 - Command completion using <kbd>CTRL</kbd> + <kbd>SPACE</kbd> keyboard shortcut
-- Clear console with ```zsh clear``` command
-- Download resume with ````zsh download``` command
+- Clear console with ```clear``` command
+- Download resume with ```download``` command
 - Display error message on incorrect command
 - Automatic console scroll down with command output
 - **Health check container that monitors the main web application container**
