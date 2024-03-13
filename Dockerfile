@@ -13,4 +13,4 @@ COPY resume.pdf /usr/share/nginx/html
 EXPOSE 80
 
 # Print to log that container loaded properly & start nginx server
-CMD ["sh", "-c", "echo 'Container loaded properly' && nginx -g 'daemon off;'"]
+CMD ["sh", "-c", "echo 'Container init successfully' && nginx -g 'daemon off;'"]
