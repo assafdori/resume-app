@@ -1,12 +1,20 @@
 version: '3'
 
+networks:
+  web-app-network:
+    name: resume-app-network
 
 services:
   cli-resume:
     image: asixl/cli-resume:0.0.9
+    networks: 
+      - web-app-network  
     container_name: cli-resume-web-app
     ports:
       - "8080:80"
+
   health-check:
     image: asixl/cli-health-check:0.0.4
+    networks: 
+      - web-app-network
     container_name: cli-resume-health-check
