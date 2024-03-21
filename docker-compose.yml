@@ -14,7 +14,7 @@ services:
       - "8080:80"
 
   health-check:
-    image: asixl/cli-health-check:0.0.4
+    image: asixl/cli-health-check:0.0.5
     networks: 
       - web-app-network
     container_name: cli-resume-health-check
