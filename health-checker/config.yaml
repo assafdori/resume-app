@@ -1,3 +1,3 @@
-URL-ENDPOINT: "cli-resume" # container name
+URL-ENDPOINT: "cli-resume" # according to service name (container)
 SLACK-TOKEN: "place-holder" # slack access token
 CHANNEL-ID: "place-holder" # desired channel ID to receive the health messages
