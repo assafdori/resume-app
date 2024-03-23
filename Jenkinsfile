@@ -1,3 +1,5 @@
+// This is a sample Jenkins file for personal learning purposses. Currently it serves no purpose.
+
 pipeline {
     agent any
     
