@@ -4,7 +4,7 @@ pipeline {
     environment {
         DOCKER_IMAGE = 'cli-resume:latest'
         REGISTRY_CREDENTIALS = 'docker-creds'
-        DOCKER_REGISTRY_URL = 'https://hub.docker.com/r/asixl'
+        DOCKER_REGISTRY_URL = 'https://hub.docker.com/u/asixl'
     }
 
     stages {
@@ -46,7 +46,7 @@ pipeline {
         always {
             // Clean up Docker resources after the build
             cleanWs()
-            docker.image(DOCKER_IMAGE).remove()
+            docker.image(DOCKER_IMAGE).remove('Cleaning up Docker resources after build')
         }
     }
 }
