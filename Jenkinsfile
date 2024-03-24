@@ -71,7 +71,7 @@ pipeline {
             steps {
                 echo 'Deliver....'
                 sh '''
-                echo "doing delivery stuff.."
+                docker push asixl/cli-resume:latest
                 '''
             }
         }
