@@ -4,7 +4,7 @@ pipeline {
     environment {
         DOCKER_IMAGE = 'cli-resume:latest'
         REGISTRY_CREDENTIALS = 'docker-creds'
-        DOCKER_REGISTRY_URL = 'https://hub.docker.com/u/asixl'
+        DOCKER_REGISTRY_URL = 'https://hub.docker.com/r/asixl/cli-resume'
     }
 
     stages {
