@@ -49,7 +49,7 @@ pipeline {
         always {
             // Clean up Docker resources after the build
             cleanWs()
-            docker.image(DOCKER_IMAGE).remove("Cleaning up Docker resources after build")
+                    sh "docker rmi ${DOCKER_IMAGE}"
         }
     }
 }
