@@ -2,7 +2,7 @@ pipeline {
     agent any
     
     environment {
-        DOCKER_IMAGE = 'cli-resume:latest'
+        DOCKER_IMAGE = 'asixl/cli-resume:latest'
         REGISTRY_CREDENTIALS = 'docker-creds'
         DOCKER_REGISTRY_URL = 'https://hub.docker.com/r/asixl/cli-resume'
     }
@@ -19,7 +19,8 @@ pipeline {
             steps {
                 // Build the Docker image
                 script {
-                    docker.build(DOCKER_IMAGE, '.')
+                    sh "docker build -t asixl/cli-resume:latest ."
+                    // docker.build(DOCKER_IMAGE, '.')
                 }
             }
         }
