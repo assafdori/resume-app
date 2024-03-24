@@ -27,6 +27,8 @@ pipeline {
         stage('Test') {
             steps {
                 // Add your test steps here
+                docker.image(DOCKER_IMAGE).run("--rm", "echo", "Docker image test successful!")
+
             }
         }
         
