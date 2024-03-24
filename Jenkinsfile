@@ -1,31 +1,52 @@
-// This is a sample Jenkins file for personal learning purposses. Currently it serves no purpose.
-
 pipeline {
     agent any
     
+    environment {
+        DOCKER_IMAGE = 'cli-resume:latest'
+        REGISTRY_CREDENTIALS = 'docker-creds'
+        DOCKER_REGISTRY_URL = 'https://hub.docker.com/r/asixl'
+    }
+
     stages {
-        stage('Build') {
+        stage('Checkout') {
             steps {
-                // Insert your build steps here
-                // Example:
-                echo 'building the application....'
+                // Checkout your code from GitHub
+                checkout scm
+            }
+        }
+        
+        stage('Build Docker Image') {
+            steps {
+                // Build the Docker image
+                script {
+                    docker.build(DOCKER_IMAGE, '.')
+                }
             }
         }
         
         stage('Test') {
             steps {
-                // Insert your test steps here
-                // Example:
-                echo 'Testing the application....'
+                // Add your test steps here
             }
         }
         
-        stage('Deploy') {
+        stage('Push Docker Image') {
             steps {
-                // Insert your deployment steps here
-                // Example:
-                echo 'Deploying the application....'
+                // Push the Docker image to a registry
+                script {
+                    docker.withRegistry(DOCKER_REGISTRY_URL, REGISTRY_CREDENTIALS) {
+                        docker.image(DOCKER_IMAGE).push()
+                    }
+                }
             }
+        }
+    }
+    
+    post {
+        always {
+            // Clean up Docker resources after the build
+            cleanWs()
+            docker.image(DOCKER_IMAGE).remove()
         }
     }
 }
