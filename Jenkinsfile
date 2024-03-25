@@ -59,34 +59,3 @@ pipeline {
         }
     }
 }
-
-
-
-// pipeline {
-//     agent any
-    
-//  triggers {
-//     pollSCM 'H/5 * * * *'
-// }
-
-//     stages {
-//         stage('Build') {
-//             steps {
-//                 echo "Building.."
-//                 sh "docker build -t asixl/cli-resume:latest ."
-//             }
-//         }
-        
-//         stage('Deliver') {
-//             steps {
-//                 echo 'Deliver....'
-//                 withCredentials([usernamePassword(credentialsId: 'docker-creds', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
-//                     sh '''
-//                     echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
-//                     docker push asixl/cli-resume:latest
-//                     '''
-//                 }
-//             }
-//         }
-//     }
-// }
