@@ -32,7 +32,7 @@ curl https://raw.githubusercontent.com/assafdori/resume-app/main/docker-compose.
 - Download resume with ```download``` command
 - Display error message on incorrect command
 - Automatic console scroll down with command output
-- **Health check container that monitors the main web application container w. Slack Bot integration (Compose only)**
+- **Health check container that monitors the main web application container w. Slack Bot integration**
 
 ### Progress, Journaling & Ideas 💡
 
