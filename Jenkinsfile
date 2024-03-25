@@ -56,7 +56,6 @@
 // }
 
 pipeline {
-
     agent any
     
     stages {
@@ -70,9 +69,12 @@ pipeline {
         stage('Deliver') {
             steps {
                 echo 'Deliver....'
-                sh '''
-                docker push asixl/cli-resume:latest
-                '''
+                withCredentials([usernamePassword(credentialsId: 'docker-creds', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                    sh '''
+                    docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+                    docker push asixl/cli-resume:latest
+                    '''
+                }
             }
         }
     }
