@@ -1,7 +1,7 @@
 // Store all executed commmands
 var cmd_list = [];
 var cmd_index = 0;
-var available_cmd = ["about", "education", "projects", "experience", "skills", "contact", "download", "help", "clear"];
+var available_cmd = ["whoami", "education", "projects", "experience", "skills", "contact", "download", "help", "clear"];
 
 // Get the input field
 var cmd = document.getElementById("command");
