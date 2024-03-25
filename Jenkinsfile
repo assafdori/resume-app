@@ -38,7 +38,8 @@ pipeline {
             steps {
                 // Push the Docker image to a registry
                 script {
-                    docker.withRegistry('', REGISTRY_CREDENTIALS)
+                    withCredentials([usernamePassword(credentialsId: 'docker-creds', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                    sh "echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin"
                     sh "docker push ${DOCKER_IMAGE}"
                     }
                 }
