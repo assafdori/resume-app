@@ -15,7 +15,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                // Checkout your code from GitHub
+                // Checkout repository
                 checkout scm
             }
         }
@@ -31,7 +31,7 @@ pipeline {
         
         stage('Test') {
             steps {
-                // Add your test steps here
+                // Place holder test stage. More advanced testing should be implemented.
                 script {
                     sh "docker run --rm ${DOCKER_IMAGE} /bin/sh -c echo 'Docker image test successful!'"
                 }
