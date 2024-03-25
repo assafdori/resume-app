@@ -54,7 +54,7 @@ pipeline {
                     sh "docker rmi ${DOCKER_IMAGE}"
         }
     }
-
+}
 
 
 
@@ -86,4 +86,3 @@ pipeline {
 //         }
 //     }
 // }
-
