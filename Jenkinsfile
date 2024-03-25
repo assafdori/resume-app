@@ -19,8 +19,7 @@ pipeline {
             steps {
                 // Build the Docker image
                 script {
-                    sh "docker build -t asixl/cli-resume:latest ."
-                    // docker.build(DOCKER_IMAGE, '.')
+                    sh "docker build -t ${DOCKER_IMAGE} ."
                 }
             }
         }
@@ -29,7 +28,7 @@ pipeline {
             steps {
                 // Add your test steps here
                 script {
-                    docker.image(DOCKER_IMAGE).run("--rm", "/bin/sh", "-c", "echo 'Docker image test successful!'")
+                    sh "docker run --rm ${DOCKER_IMAGE} /bin/sh -c echo 'Docker image test successful!'"
                 }
             }
         }
@@ -38,8 +37,9 @@ pipeline {
             steps {
                 // Push the Docker image to a registry
                 script {
-                    docker.withRegistry(DOCKER_REGISTRY_URL, REGISTRY_CREDENTIALS) {
-                        docker.image(DOCKER_IMAGE).push()
+
+                    sh "docker login -u ${REGISTRY_USERNAME} -p ${REGISTRY_PASSWORD} ${DOCKER_REGISTRY_URL}"
+                    sh "docker push ${DOCKER_IMAGE}"
                     }
                 }
             }
