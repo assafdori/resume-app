@@ -1,6 +1,10 @@
 pipeline {
 
     agent any
+
+    triggers {
+    pollSCM 'H/5 * * * *'
+    }
     
     environment {
         DOCKER_IMAGE = 'asixl/cli-resume:latest'
