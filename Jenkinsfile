@@ -1,4 +1,5 @@
 pipeline {
+
     agent any
     
     environment {
@@ -53,7 +54,8 @@ pipeline {
                     sh "docker rmi ${DOCKER_IMAGE}"
         }
     }
-}
+
+
 
 // pipeline {
 //     agent any
