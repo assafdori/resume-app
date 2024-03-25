@@ -13,7 +13,7 @@ pipeline {
     }
 
     stages {
-        stage('Checkout') {
+        stage('Checkout Git Repository') {
             steps {
                 // Checkout repository
                 checkout scm
@@ -29,7 +29,7 @@ pipeline {
             }
         }
         
-        stage('Test') {
+        stage('Test Docker Image') {
             steps {
                 // Place holder test stage. More advanced testing should be implemented.
                 script {
