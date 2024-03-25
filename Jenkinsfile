@@ -38,8 +38,7 @@ pipeline {
             steps {
                 // Push the Docker image to a registry
                 script {
-
-                    sh "docker login -u ${REGISTRY_USERNAME} -p ${REGISTRY_PASSWORD} ${DOCKER_REGISTRY_URL}"
+                    docker.withRegistry('', REGISTRY_CREDENTIALS)
                     sh "docker push ${DOCKER_IMAGE}"
                     }
                 }
@@ -54,6 +53,7 @@ pipeline {
                     sh "docker rmi ${DOCKER_IMAGE}"
         }
     }
+
 
 
 
