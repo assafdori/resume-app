@@ -52,7 +52,7 @@ pipeline {
     }
     post {
         always {
-            // Clean up Docker resources after the build
+            // Clean up Docker resources
             cleanWs()
                     sh "docker rmi ${DOCKER_IMAGE}"
         }
