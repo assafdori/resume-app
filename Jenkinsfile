@@ -24,7 +24,6 @@ pipeline {
             steps {
                 // Build the Docker image
                 script {
-                    echo "Executing pipeline for branch $BRANCH_NAME"
                     sh "docker build -t ${DOCKER_IMAGE} ."
                 }
             }
@@ -34,7 +33,6 @@ pipeline {
             steps {
                 // Place holder test stage. More advanced testing should be implemented.
                 script {
-                    echo "Executing pipeline for branch $BRANCH_NAME"
                     sh "docker run --rm ${DOCKER_IMAGE} /bin/sh -c echo 'Docker image test successful!'"
                 }
             }
