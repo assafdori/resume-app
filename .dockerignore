@@ -1,8 +1,0 @@
-# Ignore health-checker directory
-health-checker/
-
-# Ignore Compose file
-docker-compose.yml
-
-# Ignore Jenkinsfile
-Jenkinsfile
