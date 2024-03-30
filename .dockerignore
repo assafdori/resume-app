@@ -3,3 +3,6 @@ health-checker/
 
 # Ignore screen-record.gif file
 screen-record.gif
+
+# Ignore Compose file
+docker-compose.yml
