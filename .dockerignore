@@ -1,0 +1,5 @@
+# Ignore health-checker directory
+health-checker/
+
+# Ignore screen-record.gif file
+screen-record.gif
