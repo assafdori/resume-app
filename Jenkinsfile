@@ -54,7 +54,7 @@ pipeline {
                 script {
                     def dockerCMD = 'docker run -d -p 80:80 asixl/cli-resume:latest'
                     sshagent(['aws-instance-key']) {
-                        sh "ssh -o StrictHostKeyChecking=no ec2-user@3.239.12.32 ${dockerCMD}"
+                        sh "ssh -o StrictHostKeyChecking=no ec2-user@44.210.108.140 ${dockerCMD}"
                     }
                 }
             }
