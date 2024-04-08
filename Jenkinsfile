@@ -49,7 +49,19 @@ pipeline {
                 }
             }
         }
+
+        stage('Deploy Image to EC2') {
+    steps {
+        script {
+            def dockerCMD = 'docker run -d -p 80:80 asixl/cli-resume:latest'
+            sshagent(['aws-instance-key']) {
+                sh "ssh -o StrictHostKeyChecking=no ec2-user@3.239.12.32 ${dockerCMD}"
+            }
+        }
     }
+}
+
+
     post {
         always {
             // Clean up Docker resources
