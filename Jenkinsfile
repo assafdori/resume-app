@@ -1,9 +1,8 @@
 pipeline {
-
     agent any
 
     triggers {
-    pollSCM 'H/5 * * * *'
+        pollSCM 'H/5 * * * *'
     }
     
     environment {
@@ -15,7 +14,7 @@ pipeline {
     stages {
         stage('Checkout Git Repository') {
             steps {
-                // Checkout appliation repository
+                // Checkout application repository
                 checkout scm
             }
         }
@@ -31,7 +30,7 @@ pipeline {
         
         stage('Test Docker Image') {
             steps {
-                // Place holder test stage. More advanced testing should be implemented.
+                // Placeholder test stage. More advanced testing should be implemented.
                 script {
                     sh "docker run --rm ${DOCKER_IMAGE} /bin/sh -c echo 'Docker image test successful!'"
                 }
@@ -43,30 +42,30 @@ pipeline {
                 // Push the Docker image to a registry
                 script {
                     withCredentials([usernamePassword(credentialsId: 'docker-creds', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
-                    sh "echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin"
-                    sh "docker push ${DOCKER_IMAGE}"
+                        sh "echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin"
+                        sh "docker push ${DOCKER_IMAGE}"
                     }
                 }
             }
         }
 
         stage('Deploy Image to EC2') {
-    steps {
-        script {
-            def dockerCMD = 'docker run -d -p 80:80 asixl/cli-resume:latest'
-            sshagent(['aws-instance-key']) {
-                sh "ssh -o StrictHostKeyChecking=no ec2-user@3.239.12.32 ${dockerCMD}"
+            steps {
+                script {
+                    def dockerCMD = 'docker run -d -p 80:80 asixl/cli-resume:latest'
+                    sshagent(['aws-instance-key']) {
+                        sh "ssh -o StrictHostKeyChecking=no ec2-user@3.239.12.32 ${dockerCMD}"
+                    }
+                }
             }
         }
     }
-}
-
 
     post {
         always {
             // Clean up Docker resources
             cleanWs()
-                    sh "docker rmi ${DOCKER_IMAGE}"
+            sh "docker rmi ${DOCKER_IMAGE}"
         }
     }
 }
