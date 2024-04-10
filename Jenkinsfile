@@ -94,12 +94,13 @@ pipeline {
     post {
         always {
             // Clean up Docker resources
-            cleanWs()
             sh "docker rmi ${DOCKER_IMAGE}"
+            sh "terraform destroy -auto-approve"
+            cleanWs()
         }
         failure {
             // Destroy Terraform resources
-            sh "terraform destroy -auto-approve"
+            // sh "terraform destroy -auto-approve"
         }
     }
 }
