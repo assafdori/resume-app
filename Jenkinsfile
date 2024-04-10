@@ -100,7 +100,7 @@ pipeline {
         }
         failure {
             // Destroy Terraform resources
-            // sh "terraform destroy -auto-approve"
+            sh "terraform destroy -auto-approve"
         }
     }
 }
