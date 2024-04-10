@@ -15,7 +15,7 @@ pipeline {
         stage('Checkout Git Repository') {
             steps {
                 // Checkout application repository
-                checkout scm
+                checkout scm.app
             }
         }
         
@@ -60,11 +60,11 @@ pipeline {
 
         stage('Deploy Infrastructure using Terraform') {
             steps {
-                // Clone Terraform repository from GitHub
-                git 'https://github.com/assafdori/resume-app-iac.git'
+                // Checkout IaC repository
+                sh "git clone https://www.github.com/assafdori/resume-app-iac"
                 
                 // Navigate to Terraform directory
-                dir('terraform') {
+                dir('resume-app-iac') {
                     // Initialize Terraform
                     sh 'terraform init'
                     
