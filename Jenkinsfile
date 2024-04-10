@@ -62,33 +62,33 @@ pipeline {
         stage('Deploy Infrastructure using Terraform') {
             steps {
                 // Checkout IaC repository
-                sh "git clone https://www.github.com/assafdori/resume-app-iac.git"
+                // sh "git clone https://www.github.com/assafdori/resume-app-iac.git"
                 
                 // Navigate to Terraform directory
                 dir('resume-app-iac') {
                     // Initialize Terraform
-                    sh 'terraform init'
+                    sh 'terraform destory -auto-approve'
                     
                     // Apply Terraform changes
-                    sh 'terraform apply -auto-approve'
+                    // sh 'terraform apply -auto-approve'
                 }
             }
         }
 
-        stage('Deploy Image to EC2') {
-            steps {
-                script {
-                    // Retrieve the public IP address of the running EC2 instance
-                    def instanceIp = sh(script: 'aws ec2 describe-instances --filters Name=instance-state-name,Values=running Name=tag:Name,Values=resume-app-server --query "Reservations[*].Instances[*].PublicIpAddress" --output text', returnStdout: true).trim()
+        // stage('Deploy Image to EC2') {
+        //     steps {
+        //         script {
+        //             // Retrieve the public IP address of the running EC2 instance
+        //             def instanceIp = sh(script: 'aws ec2 describe-instances --filters Name=instance-state-name,Values=running Name=tag:Name,Values=resume-app-server --query "Reservations[*].Instances[*].PublicIpAddress" --output text', returnStdout: true).trim()
 
-                    // Use sshagent to handle SSH authentication
-                    sshagent(['aws-instance-key']) {
-                        // SSH into the EC2 instance and deploy the Docker image
-                        sh "ssh -o StrictHostKeyChecking=no ec2-user@${instanceIp} 'docker run -d -p 80:80 asixl/cli-resume:latest'"
-                    }
-                }
-            }
-        }
+        //             // Use sshagent to handle SSH authentication
+        //             sshagent(['aws-instance-key']) {
+        //                 // SSH into the EC2 instance and deploy the Docker image
+        //                 sh "ssh -o StrictHostKeyChecking=no ec2-user@${instanceIp} 'docker run -d -p 80:80 asixl/cli-resume:latest'"
+        //             }
+        //         }
+        //     }
+        // }
     }
 
     post {
