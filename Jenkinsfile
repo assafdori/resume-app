@@ -49,6 +49,22 @@ pipeline {
             }
         }
 
+        stage('Deploy Infrastructure using Terraform') {
+            steps {
+                // Clone Terraform repository from GitHub
+                git 'https://github.com/assafdori/resume-app-iac.git'
+                
+                // Navigate to Terraform directory
+                dir('terraform') {
+                    // Initialize Terraform
+                    sh 'terraform init'
+                    
+                    // Apply Terraform changes
+                    sh 'terraform apply -auto-approve'
+                }
+            }
+        }
+
         stage('Deploy Image to EC2') {
             steps {
                 script {
