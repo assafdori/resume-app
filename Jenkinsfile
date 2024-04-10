@@ -61,7 +61,7 @@ pipeline {
         stage('Deploy Infrastructure using Terraform') {
             steps {
                 // Checkout IaC repository
-                sh "git clone https://www.github.com/assafdori/resume-app-iac"
+                sh "git clone https://www.github.com/assafdori/resume-app-iac.git"
                 
                 // Navigate to Terraform directory
                 dir('resume-app-iac') {
