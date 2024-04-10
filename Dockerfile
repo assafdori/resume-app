@@ -17,4 +17,4 @@ HEALTHCHECK --interval=30s --timeout=10s \
     CMD curl -f http://localhost:80/resume.pdf --output /dev/null || exit 1
 
 # Print to log that container loaded properly & start nginx server
-CMD ["sh", "-c", "echo 'Container init successfully' && nginx -g 'daemon on;'"]
+CMD ["sh", "-c", "echo 'Container init successfully' && nginx -g 'daemon off;'"]
