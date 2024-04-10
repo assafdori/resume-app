@@ -52,12 +52,12 @@ pipeline {
         stage('Deploy Image to EC2') {
             steps {
                 script {
-                    def dockerCMD = 'docker run -d -p 80:80 asixl/cli-resume:latest'
-                    sshagent(['aws-instance-key']) {
-                        sh "ssh -o StrictHostKeyChecking=no ec2-user@44.222.227.173 ${dockerCMD}"
-                    }
+                    // Retrieve the public IP address of the running EC2 instance
+                def instanceIp = sh(script: 'aws ec2 describe-instances --filters Name=instance-state-name,Values=running Name=tag:Name,Values=your-instance-tag --query Reservations[*].Instances[*].PublicIpAddress --output text', returnStdout: true).trim()
+                    // SSH into the EC2 instance and deploy the Docker image
+                sh "ssh -o StrictHostKeyChecking=no ec2-user@${instanceIp} 'docker run -d -p 80:80 asixl/cli-resume:latest'"
                 }
-            }
+            }       
         }
     }
 
