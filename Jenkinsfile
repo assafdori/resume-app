@@ -15,7 +15,7 @@ pipeline {
         stage('Checkout Git Repository') {
             steps {
                 // Checkout application repository
-                checkout scm.app
+                checkout scm
             }
         }
         
