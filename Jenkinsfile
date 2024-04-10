@@ -67,6 +67,7 @@ pipeline {
                 // Navigate to Terraform directory
                 dir('resume-app-iac') {
                     // Initialize Terraform
+                    sh 'pwd'
                     sh 'terraform destory -auto-approve'
                     
                     // Apply Terraform changes
