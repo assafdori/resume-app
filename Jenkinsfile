@@ -53,7 +53,7 @@ pipeline {
             steps {
                 script {
                     // Retrieve the public IP address of the running EC2 instance
-                def instanceIp = sh(script: 'aws ec2 describe-instances --filters Name=resume-app-server,Values=running Name=tag:Name,Values=your-instance-tag --query Reservations[*].Instances[*].PublicIpAddress --output text', returnStdout: true).trim()
+                def instanceIp = sh(script: 'def instanceIp = sh(script: 'aws ec2 describe-instances --filters Name=tag:Name,Values=resume-app-server --query "Reservations[*].Instances[*].PublicIpAddress" --output text', returnStdout: true).trim()
                     // SSH into the EC2 instance and deploy the Docker image
                 sh "ssh -o StrictHostKeyChecking=no ec2-user@${instanceIp} 'docker run -d -p 80:80 asixl/cli-resume:latest'"
                 }
