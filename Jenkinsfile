@@ -70,6 +70,9 @@ pipeline {
                     sh 'terraform init'
                     
                     // Apply Terraform changes
+                    sh 'terraform plan'
+
+                    // Apply Terraform changes
                     sh 'terraform apply -auto-approve'
                 }
             }
@@ -94,9 +97,9 @@ pipeline {
     post {
         always {
             // Clean up Docker resources
-            sh "docker rmi ${DOCKER_IMAGE}"
-            sh "terraform destroy -auto-approve"
             cleanWs()
+            sh "docker rmi ${DOCKER_IMAGE}"
+            
         }
         failure {
             // Destroy Terraform resources
