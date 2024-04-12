@@ -94,7 +94,7 @@ pipeline {
         }
     }
 
-           stage('Update Porkbun NS to AWS generated NS') {
+        stage('Update Porkbun NS to AWS generated NS') {
             steps {
                 script {
                     // Download the Python script that updates nameservers
