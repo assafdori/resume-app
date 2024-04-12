@@ -94,6 +94,17 @@ pipeline {
         }
     }
 
+           stage('Update Porkbun NS to AWS generated NS') {
+            steps {
+                script {
+                    // Download the Python script that updates nameservers
+                    sh 'curl -o update-ns.py https://raw.githubusercontent.com/assafdori/resume-app-iac/main/update-ns.py'
+                    // Run the Python script that updates nameservers
+                    sh 'python3 update-ns.py'
+                }
+            }
+        }
+
     post {
         always {
             // Clean up Docker resources
