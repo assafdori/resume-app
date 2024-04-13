@@ -11,6 +11,7 @@ COPY resume.pdf /usr/share/nginx/html
 
 # Expose port 80 of the container
 EXPOSE 80
+EXPOSE 443
 
 # Add internal health check function (extenral health check done via other container)
 HEALTHCHECK --interval=30s --timeout=10s \
