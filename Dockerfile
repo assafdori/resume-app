@@ -4,6 +4,9 @@ FROM nginx:alpine
 # Install Certbot and other dependencies
 RUN apk update && apk add --no-cache certbot curl
 
+# Create directory for Certbot challenge files
+RUN mkdir -p /usr/share/nginx/html/.well-known/acme-challenge
+
 # Copy HTML, CSS, JavaScript, images, and PDF files to Nginx web root
 COPY index.html /usr/share/nginx/html
 COPY resume.js /usr/share/nginx/html
@@ -12,11 +15,11 @@ COPY favicon.png /usr/share/nginx/html
 COPY screen-record.gif /usr/share/nginx/html
 COPY resume.pdf /usr/share/nginx/html
 
-# Create directory for Certbot challenge files
-RUN mkdir -p /usr/share/nginx/html/.well-known/acme-challenge
-
 # Expose port 80 of the container
 EXPOSE 80
+EXPOSE 443
+# Configure NGINX to serve challenge files
+COPY nginx.conf /etc/nginx/nginx.conf
 
 # Add internal health check function (external health check done via other container)
 HEALTHCHECK --interval=30s --timeout=10s \
