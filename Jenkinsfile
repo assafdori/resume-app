@@ -80,12 +80,12 @@ pipeline {
 
         stage('Update Porkbun NS to AWS generated NS') {
             steps {
-                // Execute Python script concurrently with Terraform apply
+                // Execute Python script concurrently with Terraform apply (to update name servers so ACM can validate)
                 parallel (
                     "Terraform Apply": {
-                        // Wait for a few seconds to allow Terraform apply to start
+                        // Wait for Terraform apply to start & provision resources properly
                         sleep time: 60, unit: 'SECONDS'
-                        // Execute Python script
+                        // Download & execute the custom Python script
                         sh 'curl -o update-ns.py https://raw.githubusercontent.com/assafdori/resume-app-iac/main/update-ns.py'
                         sh 'python3 update-ns.py'
                     }
@@ -109,7 +109,7 @@ pipeline {
         }
 
     }
-}
+
 
 
     post {
