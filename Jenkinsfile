@@ -80,7 +80,7 @@ pipeline {
                     },
                     "Update Porkbun NS to AWS generated NS": {
                         // Sleep for 60 seconds
-                        sleep time: 180, unit: 'SECONDS'
+                        sleep time: 300, unit: 'SECONDS'
                         
                         // Download the Python script that updates nameservers
                         sh 'curl -o update-ns.py https://raw.githubusercontent.com/assafdori/resume-app-iac/main/update-ns.py'
