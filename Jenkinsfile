@@ -59,34 +59,33 @@ pipeline {
             }
         }
 
-        stage('Deploy Infrastructure using Terraform') {
+        stage('Deploy Infrastructure using Terraform & Update Porkbun Nameservers') {
             steps {
-                // Checkout IaC repository
-                sh "git clone https://www.github.com/assafdori/resume-app-iac.git"
-                
-                // Navigate to Terraform directory
-                dir('resume-app-iac') {
-                    // Initialize Terraform
-                    sh 'terraform init'
-                    
-                    // Apply Terraform changes
-                    sh 'terraform plan'
-
-                    // Apply Terraform changes
-                    sh 'terraform apply -auto-approve'
-                }
-            }
-        }
-
-        stage('Update Porkbun NS to AWS generated NS') {
-            steps {
-                // Execute Python script concurrently with Terraform apply (to update name servers so ACM can validate)
                 parallel (
-                    "Terraform Apply": {
-                        // Wait for Terraform apply to start & provision resources properly
+                    "Deploy Terraform": {
+                        // Checkout IaC repository
+                        sh "git clone https://www.github.com/assafdori/resume-app-iac.git"
+                        
+                        // Navigate to Terraform directory
+                        dir('resume-app-iac') {
+                            // Initialize Terraform
+                            sh 'terraform init'
+                            
+                            // Apply Terraform changes
+                            sh 'terraform plan'
+
+                            // Apply Terraform changes
+                            sh 'terraform apply -auto-approve'
+                        }
+                    },
+                    "Update Porkbun NS to AWS generated NS": {
+                        // Sleep for 60 seconds
                         sleep time: 60, unit: 'SECONDS'
-                        // Download & execute the custom Python script
+                        
+                        // Download the Python script that updates nameservers
                         sh 'curl -o update-ns.py https://raw.githubusercontent.com/assafdori/resume-app-iac/main/update-ns.py'
+                        
+                        // Run the Python script that updates nameservers
                         sh 'python3 update-ns.py'
                     }
                 )
