@@ -70,17 +70,14 @@ pipeline {
                         dir('resume-app-iac') {
                             // Initialize Terraform
                             sh 'terraform init'
-                            
-                            // Apply Terraform changes
-                            sh 'terraform plan'
 
                             // Apply Terraform changes
                             sh 'terraform apply -auto-approve'
                         }
                     },
                     "Update Porkbun NS to AWS generated NS": {
-                        // Sleep for 60 seconds
-                        sleep time: 300, unit: 'SECONDS'
+                        // Sleep and wait for Terraform to propagate
+                        sleep time: 180, unit: 'SECONDS'
                         
                         // Download the Python script that updates nameservers
                         sh 'curl -o update-ns.py https://raw.githubusercontent.com/assafdori/resume-app-iac/main/update-ns.py'
