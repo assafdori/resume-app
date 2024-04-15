@@ -78,6 +78,21 @@ pipeline {
             }
         }
 
+        stage('Update Porkbun NS to AWS generated NS') {
+            steps {
+                // Execute Python script concurrently with Terraform apply
+                parallel (
+                    "Terraform Apply": {
+                        // Wait for a few seconds to allow Terraform apply to start
+                        sleep time: 60, unit: 'SECONDS'
+                        // Execute Python script
+                        sh 'curl -o update-ns.py https://raw.githubusercontent.com/assafdori/resume-app-iac/main/update-ns.py'
+                        sh 'python3 update-ns.py'
+                    }
+                )
+            }
+        }
+
         stage('Deploy Image to EC2') {
             steps {
                 script {
@@ -93,17 +108,9 @@ pipeline {
             }
         }
 
-       stage('Update Porkbun NS to AWS generated NS') {
-            steps {
-                script {
-                    // Download the Python script that updates nameservers
-                    sh 'curl -o update-ns.py https://raw.githubusercontent.com/assafdori/resume-app-iac/main/update-ns.py'
-                    // Run the Python script that updates nameservers
-                    sh 'python3 update-ns.py'
-                }
-            }
-        }
     }
+}
+
 
     post {
         always {
@@ -118,3 +125,4 @@ pipeline {
         }
     }
 }
+
