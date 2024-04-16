@@ -9,7 +9,7 @@ COPY favicon.png /usr/share/nginx/html
 COPY screen-record.gif /usr/share/nginx/html
 COPY resume.pdf /usr/share/nginx/html
 
-# Expose port 80 of the container
+# Expose port 80 & 443 of the container
 EXPOSE 80
 EXPOSE 443
 
