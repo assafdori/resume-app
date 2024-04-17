@@ -62,7 +62,7 @@ function run_command(){
     // Get command output in HTML format
     var cmd_output = document.createElement("div");
     var container = document.createElement("div");
-    var node = document.createTextNode(">> " + input);
+    var node = document.createTextNode("> " + input);
     cmd_output.appendChild(container);
     container.appendChild(node);
 
