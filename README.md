@@ -33,7 +33,6 @@ curl https://raw.githubusercontent.com/assafdori/resume-app/main/docker-compose.
 - Display error message on incorrect command
 - Automatic console scroll down with command output
 - **Health check container that monitors the main web application container w. Slack Bot integration**
-
-### Progress, Journaling & Ideas 💡
-
-- ~~March 7th, 2024 - Next stage is to implement a health check system that will check the main container via HTTP requests. Utilize Docker Compose for the proof of concept, then migrate to K8s once I've adapted to it~~
+  <br/><br/>
+    <a href="https://512kb.club"><img src="https://512kb.club/assets/images/orange-team.svg"
+                alt="a proud member of the orange team of 512KB club" /></a>
