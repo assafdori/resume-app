@@ -1,20 +1,49 @@
 version: '3'
 
 networks:
-  web-app-network:
-    name: resume-app-network
+  resume-app-docker-network:
+    name: resume-app-docker-network
+
 
 services:
-  cli-resume:
+  resume-app-server:
     image: asixl/cli-resume:latest
     networks: 
-      - web-app-network  
-    container_name: cli-resume-web-app
+      - resume-app-docker-network  
+    container_name: resume-app-server
     ports:
       - "80:80"
+      - "443:443"
 
-  health-check:
-    image: asixl/cli-health-check:0.0.5
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
     networks: 
-      - web-app-network
-    container_name: cli-resume-health-check
+      - resume-app-docker-network
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+    ports:
+      - "9090:9090"
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    networks: 
+      - resume-app-docker-network
+    ports:
+      - "3000:3000"
+
+  alertmanager:
+    image: prom/alertmanager:latest
+    container_name: alertmanager
+    networks: 
+      - resume-app-docker-network
+    volumes:
+      - ./alertmanager.yml:/etc/alertmanager/alertmanager.yml:ro
+    ports:
+      - "9093:9093"
+    command:
+      - '--config.file=/etc/alertmanager/alertmanager.yml'
+

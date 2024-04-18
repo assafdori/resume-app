@@ -104,6 +104,25 @@ pipeline {
             }
         }
 
+        stage('Install Node Exporter') {
+            steps {
+                script {
+                    // Retrieve the public IP address of the running EC2 instance
+                    def instanceIp = sh(script: 'aws ec2 describe-instances --filters Name=instance-state-name,Values=running Name=tag:Name,Values=resume-app-server --query "Reservations[*].Instances[*].PublicIpAddress" --output text', returnStdout: true).trim()
+
+                    // Use sshagent to handle SSH authentication
+                    sshagent(['aws-instance-key']) {
+                        // SSH into the EC2 instance and install Node Exporter
+                        sh "ssh -o StrictHostKeyChecking=no ec2-user@${instanceIp} 'wget https://github.com/prometheus/node_exporter/releases/download/v1.7.0/node_exporter-1.7.0.linux-arm64.tar.gz'"
+                        sh "ssh -o StrictHostKeyChecking=no ec2-user@${instanceIp} 'tar -xzf node_exporter-1.7.0.linux-arm64.tar.gz'"
+                        sh "ssh -o StrictHostKeyChecking=no ec2-user@${instanceIp} 'sudo mv node_exporter-1.7.0.linux-arm64/node_exporter /usr/local/bin/'"
+                        sh "ssh -o StrictHostKeyChecking=no ec2-user@${instanceIp} 'sudo systemctl start node_exporter'"
+                        sh "ssh -o StrictHostKeyChecking=no ec2-user@${instanceIp} 'sudo systemctl enable node_exporter'"
+                    }
+                }
+            }
+        }
+
     }
 
 
