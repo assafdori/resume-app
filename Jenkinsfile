@@ -116,6 +116,8 @@ pipeline {
                         sh "ssh -o StrictHostKeyChecking=no ec2-user@${instanceIp} 'wget https://github.com/prometheus/node_exporter/releases/download/v1.7.0/node_exporter-1.7.0.linux-arm64.tar.gz'"
                         sh "ssh -o StrictHostKeyChecking=no ec2-user@${instanceIp} 'tar -xzf node_exporter-1.7.0.linux-arm64.tar.gz'"
                         sh "ssh -o StrictHostKeyChecking=no ec2-user@${instanceIp} 'sudo mv node_exporter-1.7.0.linux-arm64/node_exporter /usr/local/bin/'"
+                        sh "ssh -o StrictHostKeyChecking=no ec2-user@${instanceIp} 'sudo useradd -r -s /sbin/nologin -M node_exporter"
+
 
                         // Create the systemd unit file for Node Exporter
                         def unitFile = '''
@@ -136,7 +138,6 @@ pipeline {
                         sh "echo '${unitFile}' | ssh -o StrictHostKeyChecking=no ec2-user@${instanceIp} 'sudo tee /etc/systemd/system/node_exporter.service > /dev/null'"
 
                         // Start and enable the Node Exporter service
-                        sh "sudo useradd -r -s /sbin/nologin -M node_exporter"
                         sh "ssh -o StrictHostKeyChecking=no ec2-user@${instanceIp} 'sudo systemctl daemon-reload'"
                         sh "ssh -o StrictHostKeyChecking=no ec2-user@${instanceIp} 'sudo systemctl start node_exporter'"
                         sh "ssh -o StrictHostKeyChecking=no ec2-user@${instanceIp} 'sudo systemctl enable node_exporter'"
