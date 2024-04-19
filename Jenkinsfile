@@ -116,12 +116,34 @@ pipeline {
                         sh "ssh -o StrictHostKeyChecking=no ec2-user@${instanceIp} 'wget https://github.com/prometheus/node_exporter/releases/download/v1.7.0/node_exporter-1.7.0.linux-arm64.tar.gz'"
                         sh "ssh -o StrictHostKeyChecking=no ec2-user@${instanceIp} 'tar -xzf node_exporter-1.7.0.linux-arm64.tar.gz'"
                         sh "ssh -o StrictHostKeyChecking=no ec2-user@${instanceIp} 'sudo mv node_exporter-1.7.0.linux-arm64/node_exporter /usr/local/bin/'"
+
+                        // Create the systemd unit file for Node Exporter
+                        def unitFile = '''
+        [Unit]
+        Description=Prometheus Node Exporter
+        Wants=network-online.target
+        After=network-online.target
+
+        [Service]
+        User=node_exporter
+        Group=node_exporter
+        Type=simple
+        ExecStart=/usr/local/bin/node_exporter
+
+        [Install]
+        WantedBy=multi-user.target
+        '''
+                        sh "echo '${unitFile}' | ssh -o StrictHostKeyChecking=no ec2-user@${instanceIp} 'sudo tee /etc/systemd/system/node_exporter.service > /dev/null'"
+
+                        // Start and enable the Node Exporter service
+                        sh "ssh -o StrictHostKeyChecking=no ec2-user@${instanceIp} 'sudo systemctl daemon-reload'"
                         sh "ssh -o StrictHostKeyChecking=no ec2-user@${instanceIp} 'sudo systemctl start node_exporter'"
                         sh "ssh -o StrictHostKeyChecking=no ec2-user@${instanceIp} 'sudo systemctl enable node_exporter'"
                     }
                 }
             }
         }
+
 
     }
 
