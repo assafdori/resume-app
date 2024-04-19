@@ -136,8 +136,7 @@ pipeline {
                         sh "echo '${unitFile}' | ssh -o StrictHostKeyChecking=no ec2-user@${instanceIp} 'sudo tee /etc/systemd/system/node_exporter.service > /dev/null'"
 
                         // Start and enable the Node Exporter service
-                        sh "sudo groupadd -r node_exporter"
-                        sh "sudo useradd -r -g node_exporter -s /sbin/nologin -M node_exporter"
+                        sh "sudo useradd -r -s /sbin/nologin -M node_exporter"
                         sh "ssh -o StrictHostKeyChecking=no ec2-user@${instanceIp} 'sudo systemctl daemon-reload'"
                         sh "ssh -o StrictHostKeyChecking=no ec2-user@${instanceIp} 'sudo systemctl start node_exporter'"
                         sh "ssh -o StrictHostKeyChecking=no ec2-user@${instanceIp} 'sudo systemctl enable node_exporter'"
