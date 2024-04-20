@@ -145,11 +145,11 @@ pipeline {
                     // Use sshagent to handle SSH authentication
                     sshagent(['aws-instance-key']) {
                         // SSH into the EC2 instance and deploy the Docker image
-                        sh "ssh -o StrictHostKeyChecking=no ec2-user@${instanceIp} 'sh curl -o docker-compose.yml ${DOCKER_COMPOSE_FILE}'"
-                        sh "ssh -o StrictHostKeyChecking=no ec2-user@${instanceIp} 'sh curl -o prometheus.yml ${PROMETHEUS_CONFIG_FILE}'"
-                        sh "ssh -o StrictHostKeyChecking=no ec2-user@${instanceIp} 'sh curl -o alertmanager.yml ${ALERTMANAGER_CONFIG_FILE}'"
-                        sh "ssh -o StrictHostKeyChecking=no ec2-user@${instanceIp} 'sh curl -o alert.rules.yml ${ALERT_RULES_FILE}'"
-                        sh "ssh -o StrictHostKeyChecking=no ec2-user@${instanceIp} 'sh docker compose up -d'"
+                        sh "ssh -o StrictHostKeyChecking=no ec2-user@${instanceIp} 'curl -o docker-compose.yml ${DOCKER_COMPOSE_FILE}'"
+                        sh "ssh -o StrictHostKeyChecking=no ec2-user@${instanceIp} 'curl -o prometheus.yml ${PROMETHEUS_CONFIG_FILE}'"
+                        sh "ssh -o StrictHostKeyChecking=no ec2-user@${instanceIp} 'curl -o alertmanager.yml ${ALERTMANAGER_CONFIG_FILE}'"
+                        sh "ssh -o StrictHostKeyChecking=no ec2-user@${instanceIp} 'curl -o alert.rules.yml ${ALERT_RULES_FILE}'"
+                        sh "ssh -o StrictHostKeyChecking=no ec2-user@${instanceIp} 'docker-compose up -d'"
                     }
                 }
             }
