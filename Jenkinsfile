@@ -9,6 +9,11 @@ pipeline {
         DOCKER_IMAGE = 'asixl/cli-resume:latest'
         REGISTRY_CREDENTIALS = 'docker-creds'
         DOCKER_REGISTRY_URL = 'https://hub.docker.com/r/asixl/cli-resume'
+        DOCKER_COMPOSE_FILE = 'https://raw.githubusercontent.com/assafdori/resume-app/main/docker-compose.yml'
+        PROMETHEUS_CONFIG_FILE = 'https://raw.githubusercontent.com/assafdori/resume-app-iac/main/prometheus.yml'
+        ALERTMANAGER_CONFIG_FILE = 'https://raw.githubusercontent.com/assafdori/resume-app-iac/main/alertmanager.yml'
+        ALERT_RULES_FILE = 'https://raw.githubusercontent.com/assafdori/resume-app-iac/main/alert.rules.yml'
+
     }
 
     stages {
@@ -89,21 +94,6 @@ pipeline {
             }
         }
 
-        stage('Deploy Image to EC2') {
-            steps {
-                script {
-                    // Retrieve the public IP address of the running EC2 instance
-                    def instanceIp = sh(script: 'aws ec2 describe-instances --filters Name=instance-state-name,Values=running Name=tag:Name,Values=resume-app-server --query "Reservations[*].Instances[*].PublicIpAddress" --output text', returnStdout: true).trim()
-
-                    // Use sshagent to handle SSH authentication
-                    sshagent(['aws-instance-key']) {
-                        // SSH into the EC2 instance and deploy the Docker image
-                        sh "ssh -o StrictHostKeyChecking=no ec2-user@${instanceIp} 'docker run -d -p 80:80 asixl/cli-resume:latest'"
-                    }
-                }
-            }
-        }
-
         stage('Install Node Exporter') {
             steps {
                 script {
@@ -141,6 +131,25 @@ pipeline {
                         sh "ssh -o StrictHostKeyChecking=no ec2-user@${instanceIp} 'sudo systemctl daemon-reload'"
                         sh "ssh -o StrictHostKeyChecking=no ec2-user@${instanceIp} 'sudo systemctl start node_exporter'"
                         sh "ssh -o StrictHostKeyChecking=no ec2-user@${instanceIp} 'sudo systemctl enable node_exporter'"
+                    }
+                }
+            }
+        }
+
+        stage('Deploy Image to EC2') {
+            steps {
+                script {
+                    // Retrieve the public IP address of the running EC2 instance
+                    def instanceIp = sh(script: 'aws ec2 describe-instances --filters Name=instance-state-name,Values=running Name=tag:Name,Values=resume-app-server --query "Reservations[*].Instances[*].PublicIpAddress" --output text', returnStdout: true).trim()
+
+                    // Use sshagent to handle SSH authentication
+                    sshagent(['aws-instance-key']) {
+                        // SSH into the EC2 instance and deploy the Docker image
+                        sh "ssh -o StrictHostKeyChecking=no ec2-user@${instanceIp} 'sh curl -o docker-compose.yml ${DOCKER_COMPOSE_FILE}'"
+                        sh "ssh -o StrictHostKeyChecking=no ec2-user@${instanceIp} 'sh curl -o prometheus.yml ${PROMETHEUS_CONFIG_FILE}'"
+                        sh "ssh -o StrictHostKeyChecking=no ec2-user@${instanceIp} 'sh curl -o alertmanager.yml ${ALERTMANAGER_CONFIG_FILE}'"
+                        sh "ssh -o StrictHostKeyChecking=no ec2-user@${instanceIp} 'sh curl -o alert.rules.yml ${ALERT_RULES_FILE}'"
+                        sh "ssh -o StrictHostKeyChecking=no ec2-user@${instanceIp} 'sh docker compose up -d'"
                     }
                 }
             }
