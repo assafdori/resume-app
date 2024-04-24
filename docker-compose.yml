@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.8"
 
 networks:
   resume-app-docker-network:
@@ -10,11 +10,10 @@ volumes:
   alertmanager_data:
 
 services:
-
   resume-app-server:
     image: asixl/cli-resume:latest
-    networks: 
-      - resume-app-docker-network  
+    networks:
+      - resume-app-docker-network
     container_name: resume-app-server
     ports:
       - "80:80"
@@ -23,22 +22,22 @@ services:
   prometheus:
     image: prom/prometheus:latest
     container_name: prometheus
-    networks: 
+    networks:
       - resume-app-docker-network
     volumes:
       - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
       - ./alert.rules.yml:/etc/prometheus/alert.rules.yml:ro
       - prometheus_data:/prometheus
     command:
-      - '--config.file=/etc/prometheus/prometheus.yml'
+      - "--config.file=/etc/prometheus/prometheus.yml"
     ports:
       - "9090:9090"
-    restart: unless-stopped
+    restart: never
 
   grafana:
     image: grafana/grafana:latest
     container_name: grafana
-    networks: 
+    networks:
       - resume-app-docker-network
     ports:
       - "3000:3000"
@@ -49,7 +48,7 @@ services:
   alertmanager:
     image: prom/alertmanager:latest
     container_name: alertmanager
-    networks: 
+    networks:
       - resume-app-docker-network
     volumes:
       - ./alertmanager.yml:/etc/alertmanager/alertmanager.yml:ro
@@ -57,5 +56,6 @@ services:
     ports:
       - "9093:9093"
     command:
-      - '--config.file=/etc/alertmanager/alertmanager.yml'
+      - "--config.file=/etc/alertmanager/alertmanager.yml"
     restart: unless-stopped
+
