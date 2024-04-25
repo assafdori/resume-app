@@ -14,7 +14,7 @@ help, about, education, projects, experience, skills, contact, download, clear
 ### Application is available as a Docker image 🐋
 
 ```zsh
-docker pull asixl/cli-resume:0.0.9
+docker pull asixl/cli-resume:latest
 ```
 
 ### Also available as a Docker Compose YAML with Health Check (ARM64) 🥳
