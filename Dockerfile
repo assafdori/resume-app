@@ -21,4 +21,4 @@ HEALTHCHECK --interval=30s --timeout=10s \
 
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
 
-CMD ["sh", "-c", "echo 'Container init successfully'"]
+# CMD ["sh", "-c", "echo 'Container init successfully'"]
