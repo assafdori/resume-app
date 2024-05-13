@@ -37,7 +37,7 @@ pipeline {
             steps {
                 // Placeholder test stage. More advanced testing should be implemented.
                 script {
-                    sh "docker run --rm ${DOCKER_IMAGE} /bin/sh -c echo 'Docker image test successful!'"
+                    sh "docker run --rm ${DOCKER_IMAGE}"
                 }
             }
         }
