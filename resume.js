@@ -1,7 +1,7 @@
 // Store all executed commmands
 var cmd_list = [];
 var cmd_index = 0;
-var available_cmd = ["whoami", "education", "projects", "experience", "skills", "contact", "download", "help", "clear"];
+var available_cmd = ["whoami", "skills", "projects", "experience", "education", "contact", "status", "download", "help", "clear"];
 
 // Get the input field
 var cmd = document.getElementById("command");
@@ -43,18 +43,18 @@ function run_command(){
     if(input != ''){
       // Get command from input field 
       var element = document.getElementById(input);
-      
-      // Error command, if command not found
-      if(available_cmd.indexOf(input) < 0)
-        element = document.getElementById('error'); 
-
-      if(input == 'download')
+     // Error command, if command not found
+    if (available_cmd.indexOf(input) < 0) {
+        element = document.getElementById('error');
+    } else if (input == 'download') {
         window.open('./resume.pdf', '_blank');
-      else if(input == 'clear'){
+    } else if (input == 'status') { // New condition for the "status" command
+        window.open('https://status.assafdori.com', '_blank');
+        return; // Exit the function after opening the new tab
+    } else if (input == 'clear') {
         clear_console();
         return;
-      }
-
+    }     
       // Create a clone to show as command output
       output = element.cloneNode(true);
       output.style = "display:block";
