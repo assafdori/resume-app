@@ -76,6 +76,9 @@ pipeline {
                             // Initialize Terraform
                             sh 'terraform init'
 
+                            // Select Production Workspace
+                            sh 'terraform workspace select production || terraform workspace new production'
+
                             // Apply Terraform changes
                             sh 'terraform apply -auto-approve'
                         }
