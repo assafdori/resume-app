@@ -6,14 +6,21 @@ pipeline {
     }
     
     environment {
+        // Docker image and registry configuration 
         DOCKER_IMAGE = 'asixl/cli-resume:latest'
+
+        // Reference the Docker registry credentials ID from Jenkins
         REGISTRY_CREDENTIALS = 'docker-creds'
         DOCKER_REGISTRY_URL = 'https://hub.docker.com/r/asixl/cli-resume'
+
+        // Docker Compose file and Prometheus configuration file URLs for use on EC2
         DOCKER_COMPOSE_FILE = 'https://raw.githubusercontent.com/assafdori/resume-app/main/docker-compose.yml'
         PROMETHEUS_CONFIG_FILE = 'https://raw.githubusercontent.com/assafdori/resume-app-iac/main/prometheus.yml'
         ALERTMANAGER_CONFIG_FILE = 'https://raw.githubusercontent.com/assafdori/resume-app-iac/main/alertmanager.yml'
         ALERT_RULES_FILE = 'https://raw.githubusercontent.com/assafdori/resume-app-iac/main/alert.rules.yml'
 
+        // TF_ENV = available envs: 'dev, stage, production'
+        TF_ENV = 'production'
     }
 
     stages {
@@ -77,7 +84,7 @@ pipeline {
                             sh 'terraform init'
 
                             // Select Production Workspace
-                            sh 'terraform workspace select production || terraform workspace new production'
+                            sh 'terraform workspace select ${TF_ENV} || terraform workspace new ${TF_ENV}'
 
                             // Apply Terraform changes
                             sh 'terraform apply -auto-approve'
